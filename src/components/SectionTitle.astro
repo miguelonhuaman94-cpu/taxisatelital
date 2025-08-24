@@ -1,0 +1,24 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  title: string;
+  description: string;
+  titleClass?: string;
+}
+const { title, description, titleClass } = Astro.props as Props;
+---
+
+<div class="text-center mb-16">
+  <h2
+    class={cn(
+      "text-3xl md:text-4xl font-bold text-brand-dark mb-4",
+      titleClass
+    )}
+  >
+    {title}
+  </h2>
+  <p class="text-lg text-brand-gray max-w-2xl mx-auto">
+    {description}
+  </p>
+</div>

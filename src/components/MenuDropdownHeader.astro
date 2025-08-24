@@ -1,0 +1,189 @@
+---
+import { ChevronDown, ChevronUp } from "@lucide/astro";
+import { SERVICES } from "@/data/services";
+
+interface Props {
+  item: {
+    name: string;
+  };
+  isMobile?: boolean;
+}
+const { item, isMobile = false } = Astro.props as Props;
+---
+
+<>
+  {
+    isMobile ? (
+      <div 
+       id="menu-dropdown-mobile"
+      class="flow-root lg:hidden text-sm">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="space-y-2 py-6">
+            <div class="-mx-3">
+              <button
+              aria-label="Toggle Services"
+                type="button"
+                id="menu-toggle-mobile"
+                class="flex w-full cursor-pointer items-center justify-between rounded-lg py-2 pr-3.5 pl-3 font-medium text-brand-gray hover:text-primary transition-brand"
+                aria-expanded="false"
+              >
+                {item.name}
+                <ChevronDown
+                  id="menu-down-mobile"
+                  class="size-4"
+                />
+                <ChevronUp
+                  id="menu-up-mobile"
+                  class="size-4 hidden"
+                />
+              </button>
+              <div class="mt-2 space-y-2 hidden text-brand-gray" id="services">
+                {SERVICES.map((service) => (
+                  <a
+                    href={`/#${service.id}`}
+                    aria-label={service.title}
+                    class="service-link-mobile block rounded-lg py-2 pr-3 pl-6 text-sm hover:bg-gray-50"
+                  >
+                    {service.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div 
+      id="menu-dropdown-desktop"
+      class=" lg:flex lg:gap-x-12">
+        <div class="relative text-sm font-medium text-brand-gray hover:text-primary transition-brand">
+          <button
+            aria-label="Toggle Services"
+            type="button"
+            class="flex items-center gap-x-1"
+            aria-expanded="false"
+            id="menu-toggle"
+          >
+            {item.name}
+            <ChevronDown class="size-4 cursor-pointer" />
+          </button>
+          <div
+            id="menu-dropdown"
+            class="hidden absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"
+          >
+            <div class="p-4">
+              {SERVICES.map((service) => (
+                <div
+                class="service-link-container group relative flex items-center gap-x-6 rounded-lg p-2 text-sm/6 hover:bg-gray-50">
+                  <div class="service-link-icon flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                    <service.icon class="size-6 text-gray-600 group-hover:text-primary" />
+                  </div>
+                  <div class="flex-auto">
+                    <a
+                      href={`/#${service.id}`}
+                      class="service-link-desktop block font-semibold text-gray-900"
+                      aria-label={service.title}
+                    >
+                      {service.title}
+                      <span class="absolute inset-0" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+</>
+
+<script>
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuDropdown = document.getElementById("menu-dropdown");
+  menuToggle?.addEventListener("click", () => {
+    menuDropdown?.classList.toggle("hidden");
+    const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+    menuToggle.setAttribute("aria-expanded", `${!isExpanded}`);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (
+      !menuToggle?.contains(event.target as Node) &&
+      !menuDropdown?.contains(event.target as Node)
+    ) {
+      menuDropdown?.classList.add("hidden");
+      menuToggle?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // tu código aquí
+  const menuToggleMobile = document.getElementById("menu-toggle-mobile") as HTMLElement;
+  const menuDown = document.getElementById("menu-down-mobile");
+  const menuUp = document.getElementById("menu-up-mobile");
+  const services = document.getElementById("services");
+
+  menuToggleMobile?.addEventListener("click", () => {
+    services?.classList.toggle("hidden");
+    menuDown?.classList.toggle("hidden");
+    menuUp?.classList.toggle("hidden");
+  });
+
+  // TODO: Implement the focus on service link functionality on mobile
+
+  // Focus the any service link when the url contains the hash of a service
+    function focusServiceLink() {
+      const hash = window.location.hash; // Ej: "#cargo-moving"
+      const serviceId = hash.replace("#", "");
+
+      if (serviceId) {
+
+        const menuDropdownMobile = document.querySelector("#menu-dropdown-mobile");
+        const menuDropdownDesktop = document.querySelector("#menu-dropdown-desktop");
+  
+        if (menuDropdownDesktop) {
+          const serviceLink = document.querySelector(
+          `.service-link-desktop[href="/#${serviceId}"]`
+        ) as HTMLAnchorElement;
+          const parent = serviceLink.parentElement as HTMLElement;
+          const sibling = parent.previousElementSibling as HTMLElement;
+          const grantParent = parent.parentElement as HTMLElement;
+          // Eliminar estilos anteriores si quieres
+          document.querySelectorAll(".service-link-container").forEach((el) => {
+            el.classList.remove("bg-gray-100");
+            (el.firstChild as HTMLElement | null)?.classList.remove("bg-white");
+            (el.firstChild?.firstChild as HTMLElement | null)?.classList.remove("text-primary");
+          });
+
+          grantParent.classList.add(
+            "bg-gray-100",
+          );
+
+          sibling.classList.add(
+            "bg-white",
+          );
+
+          (sibling.firstChild as HTMLElement | null)?.classList.add(
+            "text-primary",
+          );
+        }
+      
+      if (menuDropdownMobile) {
+        //* Remove previous active styles
+        document.querySelectorAll(".service-link-mobile").forEach((el) => {
+          el.classList.remove("bg-gray-100");
+        });
+
+          const serviceLink = document.querySelector(
+            `.service-link-mobile[href="/#${serviceId}"]`
+          ) as HTMLAnchorElement;
+          serviceLink.classList.add("bg-gray-100");
+        }
+      }
+    }
+    // Ejecutar al cargar la página (por si hay un hash en la URL inicial)
+    window.addEventListener("DOMContentLoaded", focusServiceLink);
+
+    // Ejecutar cuando el hash cambia
+    window.addEventListener("hashchange", focusServiceLink);
+</script>

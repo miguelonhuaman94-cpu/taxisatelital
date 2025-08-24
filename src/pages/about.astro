@@ -1,0 +1,228 @@
+---
+import { Image } from "astro:assets";
+import { Eye, Target } from "@lucide/astro";
+
+import Layout from "../layouts/Layout.astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+
+import HeroSection from "@/components/HeroSection.astro";
+
+import { VALUES } from "@/data/why-us";
+import { TEAM_MEMBERS } from "@/data/team-members";
+
+---
+
+<Layout>
+  {/* Hero Section */}
+  <HeroSection
+    title="Sobre Nosotros"
+    description="Tu compañía de confianza para servicios de transporte premium"
+  />
+
+  {/* Main Content */}
+  <section class="py-16">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        {/* Company Story */}
+        <div class="mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-brand-dark mb-8 text-center"
+          >
+            ¿Quiénes somos?
+          </h2>
+
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Photo Section */}
+            <div class="order-2 lg:order-1">
+              <!-- <div
+                class="relative rounded-2xl overflow-hidden shadow-brand h-96 bg-gradient-card"
+              >
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="text-center text-brand-gray">
+                    <div
+                      class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+                    >
+                    </div>
+                    <p class="text-sm">Espacio para foto del equipo</p>
+                  </div>
+                </div>
+              </div> -->
+              <Image
+                src="/about.webp"
+                alt="Foto de quienes somos"
+                class="w-full h-auto lg:h-[28rem]"
+                width={800}
+                height={200}
+                loading="lazy"
+                />
+            </div>
+
+            {/* Text Content */}
+            <div
+              class="order-1 lg:order-2 prose prose-lg max-w-none text-brand-gray"
+            >
+              <p class="text-lg leading-relaxed mb-6">
+               Somos una empresa de acceso para servicio de transporte de pasajeros líder en el mercado con la flota afiliada más grande, moderna y confiable de Lima.
+              </p>
+              <p class="text-lg leading-relaxed mb-6">
+                Contamos con el respaldo del Grupo Empresarial Rizzo de Colombia, con más de 25 años de experiencia en el sector de telecomunicaciones para transporte en el mencionado país vecino y con más de 10 años de operación en nuestro país.
+              </p>
+              <p class="text-lg leading-relaxed">
+               Tenemos una Sede de más de 6 mil metros cuadrados, ubicada a 5 minutos del Aeropuerto, en la misma avenida Faucett.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Mission & Vision */}
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+          <Card class="card-brand border-0 bg-gradient-card hover-scale">
+            <CardContent class="p-8">
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4"
+                >
+                  <Target class="w-6 h-6 text-white" />
+                </div>
+                <h3 class="text-2xl font-bold text-brand-dark">
+                  Nuestra Misión
+                </h3>
+              </div>
+              <p class="text-brand-gray leading-relaxed">
+                Proporcionar servicios de transporte de alta calidad que
+                garanticen la comodidad, seguridad y satisfacción de nuestros
+                clientes, estableciendo nuevos estándares en la industria del
+                transporte ejecutivo.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card class="card-brand border-0 bg-gradient-card hover-scale">
+            <CardContent class="p-8">
+              <div class="flex items-center mb-6">
+                <div
+                  class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4"
+                >
+                  <Eye class="w-6 h-6 text-white" />
+                </div>
+                <h3 class="text-2xl font-bold text-brand-dark">
+                  Nuestra Visión
+                </h3>
+              </div>
+              <p class="text-brand-gray leading-relaxed">
+                Ser la empresa líder en servicios de transporte VIP, reconocida
+                por la excelencia en el servicio, la innovación tecnológica y el
+                compromiso inquebrantable con la satisfacción del cliente.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Values Section */}
+  <section class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
+          Nuestros Valores
+        </h2>
+        <p class="text-xl text-brand-gray max-w-2xl mx-auto">
+          Los principios que guían cada uno de nuestros servicios
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {
+          VALUES.map((value, index) => (
+            <Card
+              key={index}
+              class="card-brand border-0 hover-scale cursor-pointer bg-white"
+            >
+              <CardContent class="p-8 text-center">
+                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <value.icon class="w-8 h-8 text-white" />
+                </div>
+                <h3 class="text-xl font-bold text-brand-dark mb-4">
+                  {value.title}
+                </h3>
+                <p class="text-brand-gray leading-relaxed">
+                  {value.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* Team Section */}
+  <section class="py-16">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
+          Nuestro Equipo
+        </h2>
+        <p class="text-xl text-brand-gray max-w-2xl mx-auto">
+          Profesionales comprometidos con tu experiencia de viaje
+        </p>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        {/* Team Photos Grid */}
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          {
+            TEAM_MEMBERS.map((member) => (
+              <Card
+                key={member.id}
+                class="card-brand border-0 bg-gradient-card hover-scale"
+              >
+                 <div class="relative rounded-xl overflow-hidden shadow-brand h-48 bg-gradient-card mb-4">
+                    
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        class="w-full h-full object-cover"
+                        width={200}
+                        height={200}
+                        loading="lazy"
+                      />
+                    
+                  </div>
+                <CardContent class="p-6 text-center">
+                  
+                  <h4 class="text-lg font-semibold text-brand-dark mb-2">
+                    Miembro del Equipo
+                  </h4>
+                  <p class="text-brand-gray text-sm">Conductor Profesional</p>
+                </CardContent>
+              </Card>
+            ))
+          }
+        </div>
+
+        {/* Team Description */}
+        <Card class="card-brand border-0 bg-gradient-card">
+          <CardContent class="p-8 text-center">
+            <p class="text-lg text-brand-gray leading-relaxed mb-6">
+              Nuestro equipo está formado por conductores profesionales con
+              amplia experiencia en el sector del transporte ejecutivo. Cada
+              miembro de nuestro equipo ha sido cuidadosamente seleccionado y
+              capacitado para garantizar el más alto nivel de servicio y
+              profesionalismo.
+            </p>
+            <p class="text-lg text-brand-gray leading-relaxed">
+              Además de nuestros conductores, contamos con un equipo de atención
+              al cliente disponible 24/7 para asistirte en todas tus necesidades
+              de transporte, asegurando que cada experiencia con TransVIP sea
+              excepcional.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+</Layout>

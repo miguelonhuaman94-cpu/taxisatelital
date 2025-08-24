@@ -1,0 +1,203 @@
+---
+import { NAVIGATION } from "@/data/navigation";
+import { SERVICES } from "@/data/services";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+} from "@lucide/astro";
+import { Image } from "astro:assets";
+
+import { PHONE_NUMBER } from "astro:env/client";
+
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  services: SERVICES,
+  company: NAVIGATION,
+  legal: [
+    "Términos de servicio",
+    "Política de privacidad",
+    "Política de cancelación",
+    "FAQ",
+    "Soporte",
+  ],
+};
+---
+
+<footer class="bg-brand-dark text-white mb-auto">
+  <div class="container mx-auto px-4 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Logo and Description */}
+      <div class="lg:col-span-1">
+        <Image
+          src="/logo.svg"
+          alt="Logo de la empresa"
+          class="w-32 mb-4"
+          width={128}
+          height={64}
+        />
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Más de 25 años ofreciendo servicios de transporte premium con la más
+          alta calidad, seguridad y puntualidad en cada viaje.
+        </p>
+
+        {/* Contact Info */}
+        <div class="space-y-3">
+          <div class="flex items-center space-x-3">
+            <Phone class="w-5 h-5 text-primary" />
+            <span class="text-gray-300">
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                class="hover:text-white transition-brand"
+              >
+                {PHONE_NUMBER}
+              </a>
+            </span>
+          </div>
+          <!-- <div class="flex items-center space-x-3">
+            <Mail class="w-5 h-5 text-primary" />
+            <span class="text-gray-300">info@transvip.com</span>
+          </div> -->
+          <div class="flex items-center space-x-3">
+            <MapPin class="w-5 h-5 text-primary" />
+            <span class="text-gray-300">Aeropuerto Internacional Jorge Chávez</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Services */}
+      <div>
+        <h3 class="text-lg font-semibold mb-6">Servicios</h3>
+        <ul class="space-y-3">
+          {
+            footerLinks.services.map((link) => (
+              <li>
+                <a
+                  href={`/#${link.id}`}
+                  aria-label={link.title}
+                  class="text-gray-300 hover:text-white transition-brand"
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {/* Company */}
+      <div>
+        <h3 class="text-lg font-semibold mb-6">Empresa</h3>
+        <ul class="space-y-3">
+          {
+            footerLinks.company.map((link) => (
+              <li>
+                <a
+                  href={!link.href.startsWith("#") ? link.href : `/${link.href}`}
+                  aria-label={link.name}
+                  class="text-gray-300 hover:text-white transition-brand"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {/* Legal */}
+      <div>
+        <h3 class="text-lg font-semibold mb-6">Legal</h3>
+        <ul class="space-y-3">
+          {
+            footerLinks.legal.map((link) => (
+              <li>
+                <a
+                  href="#"
+                  aria-label={link}
+                  class="text-gray-300 hover:text-white transition-brand"
+                >
+                  {link}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    {/* Social Media and Newsletter */}
+    <div class="border-t border-gray-700 mt-12 pt-8">
+      <div
+        class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0"
+      >
+        {/* Social Media */}
+        <div class="flex items-center space-x-6">
+          <span class="text-gray-300">Síguenos:</span>
+          <div class="flex space-x-4">
+            <a
+              href="https://www.facebook.com/oficialtaxigreen/"
+              aria-label="Facebook"
+              class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-brand"
+            >
+              <Facebook class="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/taxigreen.oficial/"
+              aria-label="Instagram"
+              class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-brand"
+            >
+              <Instagram class="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.youtube.com/@taxigreen3944"
+              aria-label="TikTok"
+              class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-brand"
+            >
+              <Youtube class="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/taxi-green-oficial?trk=similar-pages&originalSubdomain=pe"
+              aria-label="LinkedIn"
+              class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-brand"
+            >
+              <Linkedin class="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Copyright */}
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0"
+      >
+        <p class="text-gray-400">
+          © {currentYear} Taxi Green Lima. Todos los derechos reservados.
+        </p>
+        <div class="flex space-x-6 text-sm">
+          <a
+            href="#"
+            aria-label="Política de Privacidad"
+            class="text-gray-400 hover:text-white transition-brand"
+          >
+            Política de Privacidad
+          </a>
+          <a
+            href="#"
+            aria-label="Términos de Servicio"
+            class="text-gray-400 hover:text-white transition-brand"
+          >
+            Términos de Servicio
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

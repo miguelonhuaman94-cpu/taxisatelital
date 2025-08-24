@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* Aquí defines tus tokens usando @theme */
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #0d0d0d;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #0d0d0d;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0d0d0d;
+
+  --color-primary: #e9242a;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #f5f5f5;
+  --color-secondary-foreground: #0d0d0d;
+
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #737373;
+
+  --color-accent: #b3e6ff;
+  --color-accent-foreground: #0d0d0d;
+
+  --color-destructive: #ff4d4f;
+  --color-destructive-foreground: #fafafa;
+
+  --color-border: #e5e5e5;
+  --color-input: #f0f0f0;
+  --color-ring: #ff4d4f;
+
+  --color-radius: 12px;
+
+  --color-brand-green: #51B15C;
+  --color-brand-blue: #b3e6ff;
+  --color-brand-dark: #1a1a1a;
+  --color-brand-gray: #737373;
+
+  --gradient-hero: linear-gradient(135deg, #ff4d4f, #b71c1c);
+  --gradient-card: linear-gradient(135deg, #ffffff, #fafafa);
+
+  --shadow-card: 0 4px 20px -2px #ff4d4f1a;
+  --shadow-button: 0 4px 14px -2px #ff4d4f33;
+  --shadow-hero: 0 25px 50px -12px #00000040;
+
+  --animate-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* --animate-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); */
+
+  --color-sidebar-background: #fafafa;
+  --color-sidebar-foreground: #23272a;
+  --color-sidebar-primary: #1a1a1a;
+  --color-sidebar-primary-foreground: #fafafa;
+  --color-sidebar-accent: #f2f2f2;
+  --color-sidebar-accent-foreground: #1a1a1a;
+  --color-sidebar-border: #e3e8ee;
+  --color-sidebar-ring: #2563eb;
+}
+
+
+
+:root {
+  --background: var(--background);
+  --foreground: var(--foreground);
+
+  --card: var(--card);
+  --card-foreground: var(--card-foreground);
+
+  --popover: var(--popover);
+  --popover-foreground: var(--popover-foreground);
+
+  --primary: var(--color-primary);
+  --primary-foreground: var(--color-primary-foreground);
+
+  --secondary: var(--secondary);
+  --secondary-foreground: var(--secondary-foreground);
+
+  --muted: var(--muted);
+  --muted-foreground: var(--muted-foreground);
+
+  --accent: var(--accent);
+  --accent-foreground: var(--accent-foreground);
+
+  --destructive: var(--destructive);
+  --destructive-foreground: var(--destructive-foreground);
+
+  --border: var(--border);
+  --input: var(--input);
+  --ring: var(--ring);
+
+  --radius: var(--radius);
+
+  --brand-green: var(--brand-green);
+  --brand-blue: var(--brand-blue);
+  --brand-dark: var(--brand-dark);
+  --brand-gray: var(--brand-gray);
+
+  --gradient-hero: var(--gradient-hero);
+  --gradient-card: var(--gradient-card);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-button: var(--shadow-button);
+  --shadow-hero: var(--shadow-hero);
+
+  --transition-smooth: var(--animate-smooth);
+  --transition-bounce: var(--animate-bounce);
+
+  /* Sidebar */
+  
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero gradient background */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Card with brand shadow */
+  .card-brand {
+    box-shadow: var(--shadow-card);
+  }
+  
+  /* Button with brand shadow */
+  .button-brand {
+    box-shadow: var(--shadow-button);
+    transition: var(--transition-smooth);
+  }
+  
+  .button-brand:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px hsl(var(--brand-green) / 0.3);
+  }
+  
+  /* Smooth transitions */
+  .transition-brand {
+    transition: var(--transition-smooth);
+  }
+  
+  /* Bounce animation */
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
+  /* Text gradient */
+  .text-gradient {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Glass effect */
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Hover scale animation */
+  .hover-scale {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+}

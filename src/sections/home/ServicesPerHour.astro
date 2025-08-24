@@ -1,0 +1,55 @@
+---
+import { Car } from "@lucide/astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import Card from "@/sections/home/components/Card.astro";
+
+import { SERVICES_PER_HOUR } from "@/data/services-per-hour";
+
+---
+
+<section 
+  id="services-per-hour"
+class="py-20 bg-gradient-to-b from-accent/10 to-background">
+  <div class="container mx-auto px-4 lg:px-8">
+    <SectionTitle
+      title="Servicios por Hora"
+      description="Flexibilidad total con nuestros servicios especializados y flota de vehículos premium"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        SERVICES_PER_HOUR.map((destination, index) => (
+          <Card
+            key={index}
+            id={destination.id}
+            title={destination.name}
+            url={destination.image}
+          >
+           
+
+            <CardContent class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-xl font-semibold text-brand-dark flex items-center">
+                  <Car class="w-5 h-5 text-primary mr-2" />
+                  {destination.name}
+                </h3>
+               
+              </div>
+
+              <p class="text-brand-gray mb-6 leading-relaxed">
+                {destination.description}
+              </p>
+
+              {/* <Button 
+               aria-label="Reservar Ahora"
+              size="sm" class="w-full">
+                Reservar ahora
+              </Button> */}
+            </CardContent>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

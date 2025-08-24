@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+
+import Card from "@/components/ui/card/Card.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+
+import { PAYMENT_METHODS } from "@/data/payment-methods";
+
+---
+
+<section 
+  id="payment-methods"
+class="py-20 bg-background">
+  <div class="container mx-auto px-4 lg:px-8">
+    <SectionTitle
+      title="Métodos de Pago"
+      description="Elige la opción que mejor se adapte a tus necesidades"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      {
+        PAYMENT_METHODS.map((method) => (
+          <Card class="group card-brand hover-scale border-0 overflow-hidden">
+            <div class="relative h-40 overflow-hidden">
+              <Image
+                src={method.image}
+                alt={method.name}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                width={600}
+                height={400}
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/60 to-transparent" />
+              <div class="absolute top-4 left-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                <method.icon class="w-5 h-5 text-primary" />
+              </div>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,152 @@
+---
+import { Image } from "astro:assets";
+import { X, Menu } from "@lucide/astro";
+import Button from "./ui/Button.astro";
+import MenuDropdownHeader from "./MenuDropdownHeader.astro";
+import { NAVIGATION } from "@/data/navigation";
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-border"
+>
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      {/* Logo */}
+      <a href="/" aria-label="Inicio" class="flex items-center space-x-2">
+        <Image
+          src="/logo.svg"
+          alt="PeGO Logo"
+          class="h-15 w-auto"
+          width={32}
+          height={32}
+        />
+      </a>
+
+      {/* Desktop Navigation */}
+      <nav id="desktop-nav" class="hidden lg:flex items-center space-x-8">
+        {
+          NAVIGATION.map((item) =>
+            item.href.startsWith("#") ? (
+              <MenuDropdownHeader item={item} />
+            ) : (
+              <a
+                href={item.href}
+                aria-label={item.name}
+                class="text-sm font-medium text-brand-gray hover:text-primary transition-brand"
+              >
+                {item.name}
+              </a>
+            )
+          )
+        }
+      </nav>
+
+      {/* Desktop Buttons */}
+      <div class="hidden lg:flex items-center space-x-3">
+        <Button
+          data-message="Hola, me gustaría reservar un servicio."
+          aria-label="Reservar Ahora"
+          size="sm"
+        >
+          Reservar Ahora
+        </Button>
+      </div>
+
+      {/* Mobile Menu Button */}
+      <button
+        aria-label="Toggle Menu"
+        class="lg:hidden p-2 cursor-pointer"
+        id="toggle-menu"
+      >
+        <X id="close-menu" class="w-6 h-6 text-brand-gray hidden" />
+        <Menu id="open-menu" class="w-6 h-6 text-brand-gray" />
+      </button>
+    </div>
+
+    {/* Mobile Menu */}
+    <div
+      id="mobile-menu"
+      class="inset-y-0 hidden lg:hidden py-4 border-t min-h-[calc(100vh-4rem)] max-h-[calc(100vh-4rem)] border-border overflow-x-hidden overflow-y-auto"
+    >
+      <nav class="flex flex-col space-y-4">
+        {
+          NAVIGATION.map((item) =>
+            item.href.startsWith("#") ? (
+              <MenuDropdownHeader item={item} isMobile />
+            ) : (
+              // <></>
+              <a
+                href={item.href}
+                aria-label={item.name}
+                class="text-sm font-medium text-brand-gray hover:text-primary transition-brand"
+              >
+                {item.name}
+              </a>
+            )
+          )
+        }
+        <div class="flex flex-col space-y-2 pt-4">
+          <Button
+            data-message="Hola, me gustaría reservar un servicio."
+            aria-label="Reservar Ahora"
+            size="sm"
+          >
+            Reservar Ahora
+          </Button>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu state
+  let isMenuOpen = false;
+
+  // Toggle mobile menu
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+  }
+
+  const menuButton = document.querySelector(
+    "#toggle-menu"
+  ) as HTMLButtonElement;
+
+  const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
+
+  // Close mobile menu on outside click
+  menuButton?.addEventListener("click", (event) => {
+    toggleMenu();
+
+    const openMenu = document.querySelector("#open-menu") as HTMLElement;
+    const closeMenu = document.querySelector("#close-menu") as HTMLElement;
+
+    if (isMenuOpen) {
+      openMenu.classList.add("hidden");
+      closeMenu.classList.remove("hidden");
+
+      mobileMenu.classList.remove("hidden");
+    } else {
+      openMenu.classList.remove("hidden");
+      closeMenu.classList.add("hidden");
+
+      mobileMenu.classList.add("hidden");
+    }
+  });
+
+  //* Change the color of the links when the url contains the href of the link
+  const links = document.querySelectorAll(
+    "#desktop-nav a, #mobile-menu a"
+  ) as NodeListOf<HTMLAnchorElement>;
+  links.forEach((link) => {
+    const href = link.getAttribute("href");
+    const currentPath = window.location.pathname;
+    if (href === currentPath || `${href}/` === currentPath) {
+      link.classList.add("text-primary");
+      link.classList.remove("text-brand-gray");
+    } else {
+      link.classList.remove("text-primary");
+      link.classList.add("text-brand-gray");
+    }
+  });
+</script>

@@ -1,0 +1,255 @@
+---
+import { Users, Fuel, Shield, Star, Car, Wifi } from "@lucide/astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import Button from "@/components/ui/Button.astro";
+
+import Layout from "@/layouts/Layout.astro";
+import HeroSection from "@/components/HeroSection.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import { AIRPORT_TRANSFER_VEHICLES } from "@/data/airport-transfer-vehicles";
+import { Image } from "astro:assets";
+
+const vehicles = [
+  {
+    id: 1,
+    name: "Sedán Ejecutivo",
+    image: "/placeholder.svg?height=300&width=400",
+    passengers: "1-3 pasajeros",
+    luggage: "2 maletas grandes",
+    features: [
+      "Aire acondicionado",
+      "WiFi gratuito",
+      "Agua embotellada",
+      "Cargador USB",
+    ],
+    description:
+      "Ideal para viajes ejecutivos y traslados al aeropuerto. Máximo confort y elegancia.",
+    price: "Desde $45/hora",
+  },
+  {
+    id: 2,
+    name: "SUV Premium",
+    image: "/placeholder.svg?height=300&width=400",
+    passengers: "1-5 pasajeros",
+    luggage: "4 maletas grandes",
+    features: [
+      "Cuero premium",
+      "Sistema de sonido",
+      "Clima dual",
+      "Asientos calefaccionados",
+    ],
+    description:
+      "Perfecto para grupos pequeños que buscan comodidad y espacio adicional.",
+    price: "Desde $65/hora",
+  },
+  {
+    id: 3,
+    name: "Van Ejecutiva",
+    image: "/placeholder.svg?height=300&width=400",
+    passengers: "6-8 pasajeros",
+    luggage: "6 maletas grandes",
+    features: [
+      "Asientos reclinables",
+      "Mesa de trabajo",
+      "Minibar",
+      "Entretenimiento",
+    ],
+    description: "Solución ideal para grupos corporativos y familias grandes.",
+    price: "Desde $85/hora",
+  },
+  {
+    id: 4,
+    name: "Limousine VIP",
+    image: "/placeholder.svg?height=300&width=400",
+    passengers: "6-10 pasajeros",
+    luggage: "4 maletas grandes",
+    features: [
+      "Bar completo",
+      "Iluminación LED",
+      "Sistema premium",
+      "Champagne de cortesía",
+    ],
+    description:
+      "La experiencia más lujosa para eventos especiales y celebraciones.",
+    price: "Desde $150/hora",
+  },
+  {
+    id: 5,
+    name: "Bus Turístico",
+    image: "/placeholder.svg?height=300&width=400",
+    passengers: "15-25 pasajeros",
+    luggage: "Compartimento amplio",
+    features: [
+      "Guía turístico",
+      "Micrófono",
+      "Ventanas panorámicas",
+      "Baño a bordo",
+    ],
+    description: "Perfecto para tours grupales y excursiones turísticas.",
+    price: "Desde $120/hora",
+  },
+  {
+    id: 6,
+    name: "Minivan Familiar",
+    image: "/placeholder.svg?height=300&width=400",
+    passengers: "4-6 pasajeros",
+    luggage: "3 maletas grandes",
+    features: [
+      "Sillas para niños",
+      "Entretenimiento",
+      "Snacks incluidos",
+      "Juegos infantiles",
+    ],
+    description: "Diseñado especialmente para familias con niños.",
+    price: "Desde $55/hora",
+  },
+];
+
+const specs = [
+  {
+    icon: Shield,
+    title: "Seguridad Garantizada",
+    description:
+      "Todos nuestros vehículos cuentan con seguro de responsabilidad civil y revisiones técnicas al día.",
+  },
+  {
+    icon: Star,
+    title: "Mantenimiento Premium",
+    description:
+      "Mantenimiento preventivo cada 5,000 km y limpieza profunda después de cada servicio.",
+  },
+  {
+    icon: Fuel,
+    title: "Eficiencia Energética",
+    description:
+      "Flota moderna con tecnología híbrida y de bajo consumo para cuidar el medio ambiente.",
+  },
+  {
+    icon: Wifi,
+    title: "Tecnología Avanzada",
+    description:
+      "GPS en tiempo real, WiFi gratuito y sistemas de entretenimiento de última generación.",
+  },
+];
+---
+
+<Layout>
+  {/* Hero Section */}
+  <HeroSection
+    title="Nuestra Flota"
+    description="Vehículos premium para cada ocasión y necesidad"
+  />
+
+  {/* Fleet Specs */}
+  <section class="py-16">
+    <div class="container mx-auto px-4 lg:px-8">
+      <SectionTitle
+        title="Especificaciones de la Flota"
+        description="Cada vehículo está diseñado para ofrecer la mejor experiencia de viaje"
+      />
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        {
+          specs.map((spec, index) => (
+            <Card
+              key={index}
+              class="card-brand border-0 text-center hover-scale cursor-pointer"
+            >
+              <CardContent class="p-6">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <spec.icon class="w-6 h-6 text-white" />
+                </div>
+                <h3 class="text-lg font-bold text-brand-dark mb-3">
+                  {spec.title}
+                </h3>
+                <p class="text-brand-gray text-sm leading-relaxed">
+                  {spec.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* Vehicles Grid */}
+  <section class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4 lg:px-8">
+      <SectionTitle
+        title="Nuestros Vehículos"
+        description="Encuentra el vehículo perfecto para tu próximo viaje"
+      />
+
+      <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {
+          AIRPORT_TRANSFER_VEHICLES.map((vehicle) => (
+            <Card
+              key={vehicle.id}
+              class="card-brand border-0 overflow-hidden bg-white hover-scale"
+            >
+              {/* <div class="aspect-video bg-muted flex items-center justify-center">
+                <Car class="w-16 h-16 text-brand-gray" />
+              </div> */}
+              <Image
+                src={vehicle.image}
+                alt={vehicle.name}
+                class="w-full h-72 object-cover"
+                width={400}
+                height={300}
+              />
+              <CardContent class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="text-xl font-bold text-brand-dark">
+                    {vehicle.name}
+                  </h3>
+                  <span class="text-lg font-bold text-primary">
+                    {vehicle.price}
+                  </span>
+                </div>
+
+                <p class="text-brand-gray mb-4">{vehicle.description}</p>
+
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div class="flex items-center space-x-2">
+                    <Users class="w-4 h-4 text-primary" />
+                    <span class="text-sm text-brand-gray">
+                      {vehicle.passengers}
+                    </span>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <div class="w-4 h-4 bg-primary rounded" />
+                    <span class="text-sm text-brand-gray">
+                      {vehicle.luggage}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <h4 class="text-sm font-bold text-brand-dark mb-2">
+                    Características incluidas:
+                  </h4>
+                  <div class="grid grid-cols-2 gap-1">
+                    {vehicle.features.map((feature) => (
+                      <div class="flex items-center space-x-1">
+                        <div class="w-1.5 h-1.5 bg-primary rounded-full" />
+                        <span class="text-xs text-brand-gray">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* <Button
+                  aria-label="Reservar Ahora"
+                size="sm" class="w-full">
+                  Reservar Ahora
+                </Button> */}
+              </CardContent>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

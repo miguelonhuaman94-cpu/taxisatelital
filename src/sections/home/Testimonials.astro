@@ -1,0 +1,251 @@
+---
+import { Star, Quote } from "@lucide/astro";
+
+import Card from "@/components/ui/card/Card.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import Carousel from "@/components/ui/Carousel.astro";
+
+import SectionTitle from "@/components/SectionTitle.astro";
+import { Image } from "astro:assets";
+
+const testimonials = [
+  {
+    name: "Andrea Sánchez",
+    role: "Ejecutiva de Ventas",
+    company: "Tech Solutions",
+    rating: 5,
+    comment:
+      "Excelente servicio de transporte! Los conductores son muy profesionales y siempre llegan a tiempo. He usado el servicio para reuniones importantes y siempre quedo satisfecha con la puntualidad y comodidad.",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b789?w=100&h=100&fit=crop&crop=face&auto=format",
+  },
+  {
+    name: "Carlos Rodríguez",
+    role: "Director Comercial",
+    company: "Global Industries",
+    rating: 5,
+    comment:
+      "Los recomiendo ampliamente. Tienen una flota moderna y el servicio al cliente es excepcional. Para viajes corporativos son la mejor opción, muy confiables y con tarifas justas.",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&auto=format",
+  },
+  {
+    name: "Elena Gutiérrez",
+    role: "Gerente de Proyectos",
+    company: "Innovation Corp",
+    rating: 5,
+    comment:
+      "Fantástico servicio para mi familia durante las vacaciones. El conductor conocía perfectamente todas las rutas turísticas y nos brindó excelentes recomendaciones. Sin duda volveremos a usar sus servicios.",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face&auto=format",
+  },
+  {
+    name: "Miguel Torres",
+    role: "Empresario",
+    company: "Torres & Asociados",
+    rating: 5,
+    comment:
+      "Profesionalismo de primera clase. He contratado sus servicios múltiples veces para eventos corporativos y siempre superan las expectativas. La atención al detalle es impresionante.",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face&auto=format",
+  },
+  {
+    name: "Miguel Torres",
+    role: "Empresario",
+    company: "Torres & Asociados",
+    rating: 5,
+    comment:
+      "Profesionalismo de primera clase. He contratado sus servicios múltiples veces para eventos corporativos y siempre superan las expectativas. La atención al detalle es impresionante.",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face&auto=format",
+  },
+];
+
+const clients = [
+  {
+    name: "RESTORE",
+    logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=100&fit=crop&crop=entropy&auto=format",
+  },
+  {
+    name: "CELSA",
+    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop&crop=entropy&auto=format",
+  },
+  {
+    name: "TATA",
+    logo: "https://images.unsplash.com/photo-1549924231-f129b911e442?w=200&h=100&fit=crop&crop=entropy&auto=format",
+  },
+];
+---
+
+<section 
+ id="testimonials"
+class="py-20 bg-gradient-to-b from-accent/10 to-background">
+  <div class="container mx-auto px-4 lg:px-8">
+    {/* Clients Section */}
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-8">
+        Clientes que Confían en Nosotros
+      </h2>
+
+      <div class="scroller" data-direction="right" data-speed="slow">
+        <div class="scroller__inner">
+          {
+            clients.map((client) => (
+              <div class="bg-white p-8 rounded-xl card-brand hover-scale">
+                <Image
+                  src={client.logo}
+                  alt={client.name}
+                  class="h-16 mx-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  width={200}
+                  height={100}
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    {/* Testimonials Section */}
+    <div class="mb-16">
+      <SectionTitle
+        titleClass="text-2xl md:text-3xl font-bold text-brand-dark mb-4"
+        title="Historias de Clientes"
+        description="Descubre lo que nuestros clientes dicen sobre su experiencia con nuestros servicios"
+      />
+
+
+      <Carousel>
+        {
+          testimonials.map((testimonial, index) => (
+            <Card
+              key={index}
+              class="card-brand hover-scale border-0 overflow-hidden"
+            >
+              <Image
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                class="w-full max-h-48 object-cover rounded-t-lg"
+                width={100}
+                height={100}
+                loading="lazy"
+              />
+
+              <CardContent class="p-8">
+                {/* Name */}
+                <div class="text-center">
+                  <div class="font-semibold text-brand-dark">
+                    {testimonial.name}
+                  </div>
+                  <div class="text-sm text-brand-gray">
+                    {testimonial.role} - {testimonial.company}
+                  </div>
+                </div>
+
+                {/* Rating */}
+                <div class="flex justify-center mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star class="w-5 h-5 text-yellow-500 fill-current" />
+                  ))}
+                </div>
+
+                {/* Comment */}
+                <p class="text-brand-gray leading-relaxed mb-6 text-center italic">
+                  "{testimonial.comment}"
+                </p>
+              </CardContent>
+            </Card>
+          ))
+        }
+      </Carousel>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scroller__inner {
+    padding-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .scroller[data-animated="true"] {
+    overflow: hidden;
+    -webkit-mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+    mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+  }
+
+  .scroller[data-animated="true"] .scroller__inner {
+    width: max-content;
+    flex-wrap: nowrap;
+    animation: scroll var(--_animation-duration, 40s)
+      var(--_animation-direction, forwards) linear infinite;
+  }
+
+  .scroller[data-direction="right"] {
+    --_animation-direction: reverse;
+  }
+
+  .scroller[data-direction="left"] {
+    --_animation-direction: forwards;
+  }
+
+  .scroller[data-speed="fast"] {
+    --_animation-duration: 20s;
+  }
+
+  .scroller[data-speed="slow"] {
+    --_animation-duration: 60s;
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+</style>
+
+<script>
+  const scrollers = document.querySelectorAll(".scroller");
+
+  // If a user hasn't opted in for recuded motion, then we add the animation
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    addAnimation();
+  }
+
+  function addAnimation() {
+    scrollers.forEach((scroller) => {
+      // add data-animated="true" to every `.scroller` on the page
+      scroller.setAttribute("data-animated", "true");
+
+      // Make an array from the elements within `.scroller-inner`
+      const scrollerInner = scroller.querySelector(
+        ".scroller__inner"
+      ) as HTMLElement;
+      const scrollerContent = Array.from(scrollerInner.children);
+
+      // For each item in the array, clone it
+      // add aria-hidden to it
+      // add it into the `.scroller-inner`
+      scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true) as HTMLElement;
+        duplicatedItem.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedItem);
+      });
+    });
+  }
+</script>

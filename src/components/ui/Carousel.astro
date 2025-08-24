@@ -1,0 +1,70 @@
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    <slot />
+  </div>
+
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-pagination mt-4"></div>
+</div>
+
+<style>
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: var(--color-primary);
+  }
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
+  import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+  const swiperWrapper = document.querySelector(
+    ".swiper-wrapper"
+  ) as HTMLElement;
+  Array.from(swiperWrapper.children).forEach((slide, index) => {
+    slide.classList.add("swiper-slide");
+  });
+
+  new Swiper(".mySwiper", {
+    modules: [Navigation, Pagination, Autoplay],
+    loop: true,
+
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+
+      bulletActiveClass: "swiper-pagination-bullet-active",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+
+      prevEl: ".swiper-button-prev",
+    },
+    loopAddBlankSlides: true,
+    slidesPerView: 1,
+    spaceBetween: 30,
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 40,
+      },
+    },
+  });
+</script>

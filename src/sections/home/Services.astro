@@ -1,0 +1,191 @@
+---
+import Button from "@/components/ui/Button.astro";
+import Card from "@/sections/home/components/Card.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+
+import { SERVICES } from "@/data/services";
+
+---
+
+<section
+  id="servicios"
+  class="py-20 bg-gradient-to-b from-background to-accent/10"
+>
+  <div class="container mx-auto px-4 lg:px-8">
+    <SectionTitle
+      title="Servicios Destacados"
+      description="Ofrecemos una amplia gama de servicios de transporte adaptados a tus necesidades específicas"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        SERVICES.slice(0, 3).map((service, index) => (
+          <Card
+            key={index}
+            id={service.id}
+            icon={service.icon}
+            url={service.image}
+            title={service.title}
+          >
+            <CardContent class="p-6">
+              <h3 class="text-xl font-semibold text-brand-dark mb-3">
+                {service.title}
+              </h3>
+              <p class="text-brand-gray mb-4 leading-relaxed">
+                {service.description}
+              </p>
+
+              <Button
+                aria-label="Reservar Ahora"
+                variant="brand"
+                data-message={`Hola, me gustaría reservar el servicio de ${service.title}.`}
+                size="sm"
+                class="w-full mt-2 mb-4"
+              >
+                Reservar ahora
+              </Button>
+              <Button
+                aria-label="Más Información"
+                variant="secondaryOutline"
+                size="sm"
+                class="w-full"
+              >
+                Más información
+              </Button>
+            </CardContent>
+          </Card>
+        ))
+      }
+    </div>
+
+    <div class="text-center mt-12">
+      <Button
+        aria-label="Ver Todos los Servicios"
+        id="view-all-services"
+        variant="brand"
+        size="lg"
+      >
+        Ver todos los servicios
+      </Button>
+    </div>
+
+    <div id="additional-services" class="hidden gap-8 mt-16">
+      {
+        SERVICES.slice(3, SERVICES.length).map((service, index) => (
+          <Card
+            key={index}
+            id={service.id}
+            icon={service.icon}
+            url={service.image}
+            title={service.title}
+          >
+            <CardContent class="p-6">
+              <h3 class="text-xl font-semibold text-brand-dark mb-3">
+                {service.title}
+              </h3>
+              <p class="text-brand-gray mb-4 leading-relaxed">
+                {service.description}
+              </p>
+              <Button
+                aria-label="Reservar Ahora"
+                variant="brand"
+                size="sm"
+                data-message={`Hola, me gustaría reservar el servicio de ${service.title}.`}
+                class="w-full mt-2 mb-4"
+              >
+                Reservar ahora
+              </Button>
+              <Button
+                aria-label="Más Información"
+                variant="secondaryOutline"
+                size="sm"
+                class="w-full"
+              >
+                Más información
+              </Button>
+            </CardContent>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+
+  <script>
+    import { smoothScrollTo } from "@/utils/smoothScrollTo.ts";
+
+    // This script can be used to toggle the visibility of additional services
+    const additionalServicesSection = document.getElementById(
+      "additional-services"
+    ) as HTMLElement;
+    const viewAllButton = document.getElementById(
+      "view-all-services"
+    ) as HTMLButtonElement;
+
+    viewAllButton.addEventListener("click", () => {
+      if (additionalServicesSection.classList.contains("hidden")) {
+        additionalServicesSection.classList.remove("hidden");
+        additionalServicesSection.classList.add(
+          "grid",
+          "grid-cols-1",
+          "md:grid-cols-2",
+          "lg:grid-cols-3"
+        );
+        viewAllButton.textContent = "Ver menos servicios";
+      } else {
+        additionalServicesSection.classList.add("hidden");
+        additionalServicesSection.classList.remove(
+          "grid",
+          "grid-cols-1",
+          "md:grid-cols-2",
+          "lg:grid-cols-3"
+        );
+        viewAllButton.textContent = "Ver todos los servicios";
+      }
+    });
+
+    // Focus the any service card when the url contains the hash of a service
+    function focusServiceCard() {
+      const hash = window.location.hash; // Ej: "#cargo-moving"
+      const serviceId = hash.replace("#", "");
+
+      if (serviceId) {
+        const serviceCard = document.getElementById(serviceId);
+        if (serviceCard) {
+          // Eliminar estilos anteriores si quieres
+          document.querySelectorAll(".service-card").forEach((el) => {
+            el.classList.remove("ring-2", "ring-primary", "focus:outline-none");
+          });
+
+          if (serviceCard.parentElement?.classList.contains("hidden")) {
+            // Show the additional services section if it's hidden
+            additionalServicesSection.classList.remove("hidden");
+            additionalServicesSection.classList.add(
+              "grid",
+              "grid-cols-1",
+              "md:grid-cols-2",
+              "lg:grid-cols-3"
+            );
+            viewAllButton.textContent = "Ver menos servicios";
+          }
+
+          const offsetTop =
+            serviceCard.getBoundingClientRect().top + window.pageYOffset;
+
+          smoothScrollTo(offsetTop, 1500);
+
+          serviceCard.classList.add(
+            "focus:outline-none",
+            "ring-2",
+            "ring-primary"
+          );
+        }
+      }
+    }
+    // Ejecutar al cargar la página (por si hay un hash en la URL inicial)
+    window.addEventListener("DOMContentLoaded", focusServiceCard);
+
+    // Ejecutar cuando el hash cambia
+    window.addEventListener("hashchange", focusServiceCard);
+  </script>
+</section>

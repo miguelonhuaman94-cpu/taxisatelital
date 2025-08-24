@@ -1,0 +1,201 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import WhatsApp from "@/components/WhatsApp.astro";
+import "@fontsource/poppins/100.css";
+import "@fontsource/poppins/200.css";
+import "@fontsource/poppins/300.css";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+import "@fontsource/poppins/900.css";
+
+import "../styles/global.css";
+
+import { PHONE_NUMBER, URL_SITE } from "astro:env/client";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="robots"
+      content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>
+      Taxi Satelital Premium en Lima :: Servicio de Taxi Aeropuerto las 24 Horas
+    </title>
+    <meta
+      name="description"
+      content="Taxi Green Aeropuerto Lima, Servicio de Taxi Aeropuerto las 24 Horas, Servicio Ejecutivo de Taxi Aeropuerto"
+    />
+    <meta
+      name="keywords"
+      content="taxi lima, taxi satelital, taxi green, taxi factura, taxi 24 horas, taxi aeropuerto"
+    />
+    <meta name="author" content="Taxi Green Aeropuerto Lima" />
+
+    <link rel="canonical" href={URL_SITE} />
+
+    {/* Open Graph Meta Tags */}
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Taxi Satelital Premium Lima | Servicio de transporte confiable 24 horas"
+    />
+    <meta
+      property="og:description"
+      content="Taxi Satelital Premium  Lima, empresa de servicio de transporte de pasajeros con la flota más grande, moderna y confiable de Lima. Servicios las 24 horas."
+    />
+    <meta property="og:url" content={URL_SITE} />
+    <meta property="og:site_name" content="Taxi Green Lima" />
+    <meta property="og:image" content="/hero.webp" />
+    <meta property="og:image:secure_url" content="/hero.webp" />
+    <meta property="og:image:width" content="1680" />
+    <meta property="og:image:height" content="1120" />
+    <meta
+      property="og:image:alt"
+      content="Taxi Green Lima - Servicio de transporte confiable"
+    />
+    <meta property="og:image:type" content="image/webp" />
+
+    {/* Twitter Card Meta Tags */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Taxi Green Lima | Servicio de transporte confiable 24 horas"
+    />
+    <meta
+      name="twitter:description"
+      content="Somos Taxi Green Lima, empresa de servicio de transporte de pasajeros con la flota más grande, moderna y confiable de Lima. Servicios las 24 horas."
+    />
+    <meta name="twitter:image" content="/hero.webp" />
+    <meta name="twitter:site" content="@TaxiGreenLima" />
+    <meta name="twitter:creator" content="@TaxiGreenLima" />
+
+    {/* Schema.org JSON-LD */}
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": ["TaxiService", "Organization"],
+            "@id": `${URL_SITE}/#organization`,
+            name: "Taxi Green Lima",
+            url: URL_SITE,
+            description:
+              "Empresa de servicio de transporte de pasajeros con la flota más grande, moderna y confiable de Lima",
+            telephone: PHONE_NUMBER,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Lima",
+              addressCountry: "PE",
+            },
+            openingHours: "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
+            priceRange: "$$",
+            serviceArea: {
+              "@type": "GeoCircle",
+              geoMidpoint: {
+                "@type": "GeoCoordinates",
+                latitude: -12.021093,
+                longitude: -77.118858,
+              },
+              geoRadius: "50000",
+            },
+          },
+          {
+            "@type": "WebSite",
+            "@id": `${URL_SITE}/#website`,
+            url: URL_SITE,
+            name: "Taxi Green Lima",
+            publisher: {
+              "@id": `${URL_SITE}/#organization`,
+            },
+            inLanguage: "es",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `${URL_SITE}/?s={search_term_string}`,
+              "query-input": "required name=search_term_string",
+            },
+          },
+        ],
+      })}
+    />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <WhatsApp />
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+
+  .card {
+    padding: 2em;
+  }
+
+  .read-the-docs {
+    color: #888;
+  }
+</style>
+
+<script
+  define:vars={{
+    phoneNumber: PHONE_NUMBER,
+  }}
+>
+  const reservationButtons = document.querySelectorAll("[data-message]");
+  reservationButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const message = button.getAttribute("data-message");
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+    });
+  });
+</script>

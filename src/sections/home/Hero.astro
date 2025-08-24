@@ -1,0 +1,107 @@
+---
+import { Image } from "astro:assets";
+import { ArrowDown, MoveRight } from "@lucide/astro";
+
+import Button from "@/components/ui/Button.astro";
+---
+
+<section
+ id="hero"
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+  {/* Background Image */}
+  <div class="absolute inset-0 z-0">
+    <Image
+      src="/hero.webp"
+      alt="Fondo de la sección de hero de Taxi Satelital"
+      class="w-full h-full object-cover"
+      width={1920}
+      height={1080}
+      loading="eager"
+      format="webp"
+      quality={80}
+      sizes="(max-width: 768px) 768px, (max-width: 1200px) 1200px, 1920px"
+      densities={[1, 2]}
+    />
+
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-brand-dark/80 via-brand-dark/60 to-transparent"
+    >
+    </div>
+  </div>
+
+  {/* Content */}
+  <div class="relative z-10 container mx-auto px-4 lg:px-8">
+    <div class="max-w-2xl">
+      <h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+        Tu viaje, Nuestra{" "}
+        <span
+          class="text-gradient text-6xl font-extrabold md:text-8xl bg-gradient-to-r from-primary to-green-200 bg-clip-text text-transparent"
+        >
+          Prioridad
+        </span>
+      </h1>
+      <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+        Con más de una década de experiencia, ofrecemos un servicio de
+        transporte premium que garantiza comodidad, puntualidad y seguridad en
+        cada trayecto.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <Button 
+         aria-label="Realizar Reserva"
+          data-message="Hola, me gustaría reservar un servicio."
+        variant="hero" size="xl" class="group">
+          Realiza tu reserva
+          <MoveRight
+            class="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1"
+          />
+        </Button>
+        <Button
+        id="services-button"
+          aria-label="Ver Nuestros Servicios"
+          variant="brandOutline"
+          size="xl"
+          class="text-white border-white hover:bg-white hover:text-primary"
+        >
+          Ver nuestros servicios
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  {/* Scroll Indicator */}
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+    <div class="animate-bounce">
+      <ArrowDown class="size-8 text-white" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-title {
+    font-size: 2.25rem; /* 36px - tamaño base para móvil */
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 3.75rem; /* 60px - tamaño para tablet y desktop */
+    }
+  }
+
+  /* Asegurar que el h1 mantenga su tamaño específico dentro de la section */
+  section .hero-title {
+    font-size: 2.25rem !important;
+  }
+
+  @media (min-width: 768px) {
+    section .hero-title {
+      font-size: 3.75rem !important;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('services-button')?.addEventListener('click', () => {
+    document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
