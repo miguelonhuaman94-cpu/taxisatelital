@@ -19,183 +19,185 @@ import { PHONE_NUMBER, URL_SITE } from "astro:env/client";
 
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="robots"
-      content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="robots" content="index, follow" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>
-      Taxi Satelital Premium en Lima :: Servicio de Taxi Aeropuerto las 24 Horas
-    </title>
-    <meta
-      name="description"
-      content="Taxi Green Aeropuerto Lima, Servicio de Taxi Aeropuerto las 24 Horas, Servicio Ejecutivo de Taxi Aeropuerto"
-    />
-    <meta
-      name="keywords"
-      content="taxi lima, taxi satelital, taxi green, taxi factura, taxi 24 horas, taxi aeropuerto"
-    />
-    <meta name="author" content="Taxi Green Aeropuerto Lima" />
-
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={URL_SITE} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-    {/* Open Graph Meta Tags */}
-    <meta property="og:locale" content="es_ES" />
-    <meta property="og:type" content="website" />
+    <title>Taxi Satelital Premium Lima | Taxi Aeropuerto Perú</title>
     <meta
-      property="og:title"
-      content="Taxi Satelital Premium Lima | Servicio de transporte confiable 24 horas"
+            name="description"
+            content="Taxi Satelital Premium en Lima, Perú. Servicio ejecutivo 24 horas: traslado al aeropuerto, chofer de reemplazo, viajes turísticos, envíos, mudanzas y más."
     />
     <meta
-      property="og:description"
-      content="Taxi Satelital Premium  Lima, empresa de servicio de transporte de pasajeros con la flota más grande, moderna y confiable de Lima. Servicios las 24 horas."
+            name="keywords"
+            content="taxi satelital lima, taxi aeropuerto jorge chávez, taxi ejecutivo lima, chofer por horas, taxi confiable lima, mudanzas lima, taxi turístico lima, envío de paquetes"
+    />
+    <meta name="author" content="Taxi Satelital Premium Lima" />
+
+    <!-- Open Graph -->
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Taxi Satelital Premium Lima | Servicio Ejecutivo 24/7 en Perú" />
+    <meta
+            property="og:description"
+            content="Taxi Satelital Premium en Lima, Perú. Transporte ejecutivo al aeropuerto, viajes turísticos, chofer de reemplazo, servicio por horas, mudanzas y más."
     />
     <meta property="og:url" content={URL_SITE} />
-    <meta property="og:site_name" content="Taxi Green Lima" />
+    <meta property="og:site_name" content="Taxi Satelital Premium" />
     <meta property="og:image" content="/hero.webp" />
     <meta property="og:image:secure_url" content="/hero.webp" />
     <meta property="og:image:width" content="1680" />
     <meta property="og:image:height" content="1120" />
-    <meta
-      property="og:image:alt"
-      content="Taxi Green Lima - Servicio de transporte confiable"
-    />
+    <meta property="og:image:alt" content="Taxi Satelital Premium Lima - Transporte Ejecutivo" />
     <meta property="og:image:type" content="image/webp" />
 
-    {/* Twitter Card Meta Tags */}
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Taxi Satelital Premium Lima | Servicio Ejecutivo 24/7 en Perú" />
     <meta
-      name="twitter:title"
-      content="Taxi Green Lima | Servicio de transporte confiable 24 horas"
-    />
-    <meta
-      name="twitter:description"
-      content="Somos Taxi Green Lima, empresa de servicio de transporte de pasajeros con la flota más grande, moderna y confiable de Lima. Servicios las 24 horas."
+            name="twitter:description"
+            content="Somos Taxi Satelital Premium en Lima. Servicio de taxi seguro y confiable, 24 horas, para traslados al aeropuerto, turismo, paquetes, mudanzas y más."
     />
     <meta name="twitter:image" content="/hero.webp" />
-    <meta name="twitter:site" content="@TaxiGreenLima" />
-    <meta name="twitter:creator" content="@TaxiGreenLima" />
+    <meta name="twitter:site" content="@TaxiSatelitalPremium" />
+    <meta name="twitter:creator" content="@TaxiSatelitalPremium" />
 
-    {/* Schema.org JSON-LD */}
+    <!-- Schema.org JSON-LD -->
     <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": ["TaxiService", "Organization"],
-            "@id": `${URL_SITE}/#organization`,
-            name: "Taxi Green Lima",
-            url: URL_SITE,
-            description:
-              "Empresa de servicio de transporte de pasajeros con la flota más grande, moderna y confiable de Lima",
-            telephone: PHONE_NUMBER,
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Lima",
-              addressCountry: "PE",
-            },
-            openingHours: "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
-            priceRange: "$$",
-            serviceArea: {
-              "@type": "GeoCircle",
-              geoMidpoint: {
-                "@type": "GeoCoordinates",
-                latitude: -12.021093,
-                longitude: -77.118858,
-              },
-              geoRadius: "50000",
-            },
-          },
-          {
-            "@type": "WebSite",
-            "@id": `${URL_SITE}/#website`,
-            url: URL_SITE,
-            name: "Taxi Green Lima",
-            publisher: {
-              "@id": `${URL_SITE}/#organization`,
-            },
-            inLanguage: "es",
-            potentialAction: {
-              "@type": "SearchAction",
-              target: `${URL_SITE}/?s={search_term_string}`,
-              "query-input": "required name=search_term_string",
-            },
-          },
-        ],
-      })}
+            type="application/ld+json"
+            set:html={JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": ["TaxiService", "LocalBusiness"],
+                        "@id": `${URL_SITE}/#organization`,
+                        name: "Taxi Satelital Premium",
+                        url: URL_SITE,
+                        telephone: PHONE_NUMBER,
+                        description: "Servicio de taxi satelital ejecutivo en Lima, Perú. Transporte seguro al aeropuerto, turismo, mudanzas y más.",
+                        image: `${URL_SITE}/logo.png`,
+                        address: {
+                            "@type": "PostalAddress",
+                            addressLocality: "Lima",
+                            addressRegion: "Lima",
+                            addressCountry: "PE"
+                        },
+                        openingHours: "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
+                        priceRange: "$$",
+                        serviceArea: {
+                            "@type": "GeoCircle",
+                            geoMidpoint: {
+                                "@type": "GeoCoordinates",
+                                latitude: -12.0464,
+                                longitude: -77.0428
+                            },
+                            geoRadius: 50000
+                        },
+                        areaServed: {
+                            "@type": "Place",
+                            name: "Lima"
+                        },
+                        makesOffer: [
+                            {
+                                "@type": "Offer",
+                                name: "Traslado al aeropuerto"
+                            },
+                            {
+                                "@type": "Offer",
+                                name: "Chofer de reemplazo"
+                            },
+                            {
+                                "@type": "Offer",
+                                name: "Viajes turísticos"
+                            },
+                            {
+                                "@type": "Offer",
+                                name: "Envío de paquetes"
+                            },
+                            {
+                                "@type": "Offer",
+                                name: "Viajes escolares"
+                            },
+                            {
+                                "@type": "Offer",
+                                name: "Carga y mudanzas"
+                            },
+                            {
+                                "@type": "Offer",
+                                name: "Servicio por horas"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": `${URL_SITE}/#website`,
+                        url: URL_SITE,
+                        name: "Taxi Satelital Premium",
+                        publisher: {
+                            "@id": `${URL_SITE}/#organization`
+                        },
+                        inLanguage: "es",
+                        potentialAction: {
+                            "@type": "SearchAction",
+                            target: `${URL_SITE}/?s={search_term_string}`,
+                            "query-input": "required name=search_term_string"
+                        }
+                    }
+                ]
+            })}
     />
-  </head>
-  <body>
-    <Header />
+</head>
+
+<body>
+<Header />
+<main>
     <slot />
-    <WhatsApp />
-    <Footer />
-  </body>
+</main>
+<WhatsApp />
+<Footer />
+</body>
 </html>
 
 <style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    font-family: "Poppins", sans-serif;
-  }
-
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
-
-  @keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: "Poppins", sans-serif;
+        background-color: #ffffff;
+        color: #111111;
     }
-    to {
-      transform: rotate(360deg);
+
+    a {
+        text-decoration: none;
+        color: inherit;
     }
-  }
 
-  @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
     }
-  }
-
-  .card {
-    padding: 2em;
-  }
-
-  .read-the-docs {
-    color: #888;
-  }
 </style>
 
 <script
-  define:vars={{
-    phoneNumber: PHONE_NUMBER,
-  }}
+        define:vars={{
+            phoneNumber: PHONE_NUMBER,
+        }}
 >
-  const reservationButtons = document.querySelectorAll("[data-message]");
-  reservationButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const message = button.getAttribute("data-message");
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, "_blank");
+    const reservationButtons = document.querySelectorAll("[data-message]");
+    reservationButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const message = button.getAttribute("data-message");
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, "_blank");
+        });
     });
-  });
 </script>
