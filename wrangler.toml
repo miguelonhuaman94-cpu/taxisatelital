@@ -9,4 +9,4 @@ directory = "./dist"
 
 [env.production]
 route = "www.taxisatelitalpremium.com.pe/*"
-zone_id = "c9c753e71fb8159f5eeb64b2459a90ff"
+zone_id = "8491028da4edc7296983e9da20f8a8df"
