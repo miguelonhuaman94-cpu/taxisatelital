@@ -14,19 +14,19 @@ import "@fontsource/poppins/900.css";
 
 import "../styles/global.css";
 
-import { PHONE_NUMBER, URL_SITE } from "astro:env/client";
+import {PHONE_NUMBER, URL_SITE} from "astro:env/client";
 ---
 
 <!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="index, follow" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={URL_SITE} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="index, follow"/>
+    <meta name="generator" content={Astro.generator}/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="canonical" href={URL_SITE}/>
+    <link rel="sitemap" href="/sitemap-index.xml"/>
 
     <title>Taxi Satelital Premium Lima | Taxi Aeropuerto Perú</title>
     <meta
@@ -37,35 +37,35 @@ import { PHONE_NUMBER, URL_SITE } from "astro:env/client";
             name="keywords"
             content="taxi satelital lima, taxi aeropuerto jorge chávez, taxi ejecutivo lima, chofer por horas, taxi confiable lima, mudanzas lima, taxi turístico lima, envío de paquetes"
     />
-    <meta name="author" content="Taxi Satelital Premium Lima" />
+    <meta name="author" content="Taxi Satelital Premium Lima"/>
 
     <!-- Open Graph -->
-    <meta property="og:locale" content="es_PE" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Taxi Satelital Premium Lima | Servicio Ejecutivo 24/7 en Perú" />
+    <meta property="og:locale" content="es_PE"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Taxi Satelital Premium Lima | Servicio Ejecutivo 24/7 en Perú"/>
     <meta
             property="og:description"
             content="Taxi Satelital Premium en Lima, Perú. Transporte ejecutivo al aeropuerto, viajes turísticos, chofer de reemplazo, servicio por horas, mudanzas y más."
     />
-    <meta property="og:url" content={URL_SITE} />
-    <meta property="og:site_name" content="Taxi Satelital Premium" />
-    <meta property="og:image" content="/hero.webp" />
-    <meta property="og:image:secure_url" content="/hero.webp" />
-    <meta property="og:image:width" content="1680" />
-    <meta property="og:image:height" content="1120" />
-    <meta property="og:image:alt" content="Taxi Satelital Premium Lima - Transporte Ejecutivo" />
-    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:url" content={URL_SITE}/>
+    <meta property="og:site_name" content="Taxi Satelital Premium"/>
+    <meta property="og:image" content="/hero.webp"/>
+    <meta property="og:image:secure_url" content="/hero.webp"/>
+    <meta property="og:image:width" content="1680"/>
+    <meta property="og:image:height" content="1120"/>
+    <meta property="og:image:alt" content="Taxi Satelital Premium Lima - Transporte Ejecutivo"/>
+    <meta property="og:image:type" content="image/webp"/>
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Taxi Satelital Premium Lima | Servicio Ejecutivo 24/7 en Perú" />
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Taxi Satelital Premium Lima | Servicio Ejecutivo 24/7 en Perú"/>
     <meta
             name="twitter:description"
             content="Somos Taxi Satelital Premium en Lima. Servicio de taxi seguro y confiable, 24 horas, para traslados al aeropuerto, turismo, paquetes, mudanzas y más."
     />
-    <meta name="twitter:image" content="/hero.webp" />
-    <meta name="twitter:site" content="@TaxiSatelitalPremium" />
-    <meta name="twitter:creator" content="@TaxiSatelitalPremium" />
+    <meta name="twitter:image" content="/hero.webp"/>
+    <meta name="twitter:site" content="@TaxiSatelitalPremium"/>
+    <meta name="twitter:creator" content="@TaxiSatelitalPremium"/>
 
     <!-- Schema.org JSON-LD -->
     <script
@@ -151,15 +151,28 @@ import { PHONE_NUMBER, URL_SITE } from "astro:env/client";
                 ]
             })}
     />
-</head>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17500159047">
+    </script>
+    <script client:load>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-17500159047');
+    </script>
+
+
+    </head>
 
 <body>
-<Header />
+<Header/>
 <main>
-    <slot />
+<slot />
 </main>
-<WhatsApp />
-<Footer />
+<WhatsApp/>
+<Footer/>
 </body>
 </html>
 
